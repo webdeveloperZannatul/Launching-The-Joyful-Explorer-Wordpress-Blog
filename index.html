@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Joyful Explorer - Notes From The Road</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), 
+                        url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920&q=80') center/cover no-repeat;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 14px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card {
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+
+        .destination-img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.5s ease;
+        }
+
+        .destination-img:hover {
+            transform: scale(1.05);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: #667eea;
+            transform: translateY(-3px);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                background-attachment: scroll;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 bg-white shadow-md transition-all duration-300" id="header">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <span>The Joyful Explorer</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link font-medium text-gray-700 hover:text-purple-600">Home</a>
+                    <a href="#about" class="nav-link font-medium text-gray-700 hover:text-purple-600">About</a>
+                    <a href="#destinations" class="nav-link font-medium text-gray-700 hover:text-purple-600">Destinations</a>
+                    <a href="#journal" class="nav-link font-medium text-gray-700 hover:text-purple-600">Journal</a>
+                    <a href="#contact" class="nav-link font-medium text-gray-700 hover:text-purple-600">Contact</a>
+                </div>
+
+                <button class="md:hidden text-2xl text-gray-700" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="hidden md:hidden mt-4 pb-4" id="mobile-menu">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-purple-600">Home</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-purple-600">About</a>
+                <a href="#destinations" class="block py-2 text-gray-700 hover:text-purple-600">Destinations</a>
+                <a href="#journal" class="block py-2 text-gray-700 hover:text-purple-600">Journal</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-purple-600">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content px-6">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 drop-shadow-lg">The Joyful Explorer</h1>
+            <p class="text-2xl md:text-3xl mb-8 font-light drop-shadow-lg">Notes From The Road</p>
+            <p class="text-2xl md:text-3xl mb-8 font-light drop-shadow-lg" style="color: #261b65;
+            ">Real experiences, Observed and Remembered. </p>
+            <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto drop-shadow-md">
+                A personal travel journal capturing real experiences, observed and remembered. 
+                Follow along as I explore the world, one adventure at a time.
+            </p>
+            <a href="#about" class="btn-primary">Start Exploring</a>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down text-white text-3xl"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gradient-to-br from-purple-50 to-blue-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title">Why This Journey?</h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto">
+                    At a point in life where time allows for freer exploration
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="stat-card">
+                    <i class="fas fa-map-marked-alt text-5xl mb-4"></i>
+                    <h3 class="text-4xl font-bold mb-2">50+</h3>
+                    <p class="text-lg">Cities Explored</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-camera text-5xl mb-4"></i>
+                    <h3 class="text-4xl font-bold mb-2">1000+</h3>
+                    <p class="text-lg">Memories Captured</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-pen-fancy text-5xl mb-4"></i>
+                    <h3 class="text-4xl font-bold mb-2">100+</h3>
+                    <p class="text-lg">Stories Written</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80" 
+                         alt="Travel" 
+                         class="w-full md:w-1/2 rounded-2xl shadow-lg">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-4 text-gray-800">The Purpose</h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            I've reached a point in life where I finally have the time to travel more freely. 
+                            This blog is a way to keep a record of where I go, what I see, and what I experience along the way.
+                        </p>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            I've already found that places can blur together if I don't write them down. 
+                            It's also a way for friends to follow along, and maybe find ideas for their own trips.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            This is simply a personal journal—notes from the road as I go. 
+                            If you're reading this, I'm glad you're here.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Destinations -->
+    <section id="destinations" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title">Featured Destinations</h2>
+                <p class="text-gray-600 text-lg">Places that left an impression</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card bg-white">
+                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80" 
+                         alt="Paris" 
+                         class="card-img">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-800">Paris, France</h3>
+                        <p class="text-gray-600 mb-4">The city of lights never fails to enchant with its timeless beauty and romantic atmosphere.</p>
+                        <div class="flex items-center text-purple-600">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span class="font-medium">Europe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" 
+                         alt="Mountains" 
+                         class="card-img">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-800">Swiss Alps</h3>
+                        <p class="text-gray-600 mb-4">Majestic peaks and pristine valleys offering breathtaking views at every turn.</p>
+                        <div class="flex items-center text-purple-600">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span class="font-medium">Europe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white">
+                    <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80" 
+                         alt="Santorini" 
+                         class="card-img">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-800">Santorini, Greece</h3>
+                        <p class="text-gray-600 mb-4">White-washed buildings against blue domes, overlooking the Aegean Sea.</p>
+                        <div class="flex items-center text-purple-600">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span class="font-medium">Europe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white">
+                    <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600&q=80" 
+                         alt="Italy" 
+                         class="card-img">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-800">Venice, Italy</h3>
+                        <p class="text-gray-600 mb-4">Canals, gondolas, and centuries of art and architecture create a magical atmosphere.</p>
+                        <div class="flex items-center text-purple-600">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span class="font-medium">Europe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white">
+                    <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=600&q=80" 
+                         alt="Beach" 
+                         class="card-img">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-800">Bali, Indonesia</h3>
+                        <p class="text-gray-600 mb-4">Tropical paradise with lush jungles, pristine beaches, and rich cultural heritage.</p>
+                        <div class="flex items-center text-purple-600">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span class="font-medium">Asia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white">
+                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&q=80" 
+                         alt="Northern Lights" 
+                         class="card-img">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-800">Iceland</h3>
+                        <p class="text-gray-600 mb-4">Land of fire and ice, where nature's raw power creates unforgettable landscapes.</p>
+                        <div class="flex items-center text-purple-600">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span class="font-medium">Europe</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journal Entries -->
+    <section id="journal" class="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title">Recent Journal Entries</h2>
+                <p class="text-gray-600 text-lg">Observations and experiences from the road</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=800&q=80" 
+                         alt="Journal Entry" 
+                         class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <div class="flex items-center text-purple-600 mb-3">
+                            <i class="fas fa-calendar-alt mr-2"></i>
+                            <span class="text-sm font-medium">March 15, 2024</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Morning Coffee in Vienna</h3>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            There's something magical about starting the day at a traditional Viennese café. 
+                            The ritual, the atmosphere, the perfect blend of old-world charm and modern comfort...
+                        </p>
+                        <a href="#" class="text-purple-600 font-medium hover:underline">Read More →</a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80" 
+                         alt="Journal Entry" 
+                         class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <div class="flex items-center text-purple-600 mb-3">
+                            <i class="fas fa-calendar-alt mr-2"></i>
+                            <span class="text-sm font-medium">March 10, 2024</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Sunset Over the Mediterranean</h3>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            Watching the sun dip below the horizon, painting the sky in shades of orange and pink. 
+                            These are the moments that make every journey worthwhile...
+                        </p>
+                        <a href="#" class="text-purple-600 font-medium hover:underline">Read More →</a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" 
+                         alt="Journal Entry" 
+                         class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <div class="flex items-center text-purple-600 mb-3">
+                            <i class="fas fa-calendar-alt mr-2"></i>
+                            <span class="text-sm font-medium">March 5, 2024</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">A Hidden Gem in Tuscany</h3>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            Sometimes the best discoveries are the ones you stumble upon by accident. 
+                            A small trattoria off the beaten path served the most memorable meal...
+                        </p>
+                        <a href="#" class="text-purple-600 font-medium hover:underline">Read More →</a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80" 
+                         alt="Journal Entry" 
+                         class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <div class="flex items-center text-purple-600 mb-3">
+                            <i class="fas fa-calendar-alt mr-2"></i>
+                            <span class="text-sm font-medium">February 28, 2024</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Mountain Solitude</h3>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            High in the mountains, away from the crowds, I found the peace I didn't know I was looking for. 
+                            Just me, nature, and endless quiet...
+                        </p>
+                        <a href="#" class="text-purple-600 font-medium hover:underline">Read More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title">Photo Gallery</h2>
+                <p class="text-gray-600 text-lg">Moments captured through the lens</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=400&q=80" 
+                     alt="Gallery" 
+                     class="destination-img h-64">
+                <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=400&q=80" 
+                     alt="Gallery" 
+                     class="destination-img h-64">
+                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&q=80" 
+                     alt="Gallery" 
+                     class="destination-img h-64">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNeYCFrW8OrNzhz1Cw5rNPRC_D7A1qBRzQSw&s?w=400&q=80" 
+                     alt="Gallery" 
+                     class="destination-img h-64">
+                <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=400&q=80" 
+                     alt="Gallery" 
+                     class="destination-img h-64">
+                <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80" 
+                     alt="Gallery" 
+                     class="destination-img h-64">
+                <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=400&q=80" 
+                     alt="Gallery" 
+                     class="destination-img h-64">
+                <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=400&q=80" 
+                     alt="Gallery" 
+                     class="destination-img h-64">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-purple-100 to-blue-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="text-gray-600 text-lg">Have questions or want to share your own travel stories?</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-6 text-gray-800">Let's Connect</h3>
+                        <p class="text-gray-600 mb-8 leading-relaxed">
+                            I'd love to hear from fellow travelers and readers. Whether you have questions about a destination, 
+                            want to share your own experiences, or just want to say hello, feel free to reach out.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center text-gray-700">
+                                <i class="fas fa-envelope text-purple-600 text-xl mr-4"></i>
+                                <span>hello@joyfulexplorer.com</span>
+                            </div>
+                            <div class="flex items-center text-gray-700">
+                                <i class="fas fa-globe text-purple-600 text-xl mr-4"></i>
+                                <span>www.joyfulexplorer.com</span>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-4 mt-8">
+                            <a href="#" class="social-icon text-gray-700 hover:text-white">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon text-gray-700 hover:text-white">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon text-gray-700 hover:text-white">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon text-gray-700 hover:text-white">
+                                <i class="fab fa-pinterest"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <form class="contact-form">
+                            <input type="text" placeholder="Your Name" required>
+                            <input type="email" placeholder="Your Email" required>
+                            <input type="text" placeholder="Subject">
+                            <textarea rows="5" placeholder="Your Message" required></textarea>
+                            <button type="submit" class="btn-primary w-full">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="logo mb-4">
+                        <div class="logo-icon bg-white">
+                            <i class="fas fa-compass text-purple-600"></i>
+                        </div>
+                        <span class="text-white">The Joyful Explorer</span>
+                    </div>
+                    <p class="text-gray-300">Notes From The Road - A personal travel journal capturing real experiences from around the world.</p>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-300 hover:text-white">Home</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-white">About</a></li>
+                        <li><a href="#destinations" class="text-gray-300 hover:text-white">Destinations</a></li>
+                        <li><a href="#journal" class="text-gray-300 hover:text-white">Journal</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">City Guides</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Food & Dining</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Culture</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Nature</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Follow Along</h4>
+                    <p class="text-gray-300 mb-4">Join me on this journey and never miss an adventure.</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="social-icon text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon text-white">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-600 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2026 The Joyful Explorer. All rights reserved developed by Zannatul. | Powered by WordPress with Twenty Twenty-Four Theme</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Header scroll effect
+        let lastScroll = 0;
+        const header = document.getElementById('header');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                header.style.padding = '12px 0';
+                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.padding = '16px 0';
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! I\'ll get back to you soon.');
+            e.target.reset();
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .stat-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
